@@ -30,8 +30,6 @@ const actions = {
 	/**
 	 * Opens a modal.
 	 *
-	 * @since 1.0.0
-	 *
 	 * @param modalId - Modal identifier.
 	 * @returns Action creator.
 	 */
@@ -46,8 +44,6 @@ const actions = {
 	/**
 	 * Closes the currently open modal.
 	 *
-	 * @since 1.0.0
-	 *
 	 * @returns Action creator.
 	 */
 	closeModal() {
@@ -61,8 +57,6 @@ const actions = {
 	 *
 	 * If the modal is active, it will be closed.
 	 * If the modal is closed or another modal is active, it will be opened.
-	 *
-	 * @since 1.0.0
 	 *
 	 * @param modalId - Modal identifier.
 	 * @returns Action creator.

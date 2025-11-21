@@ -7,8 +7,6 @@ import { useHasSidebar } from '../Sidebar';
 /**
  * Renders a utility component to register general keyboard shortcuts for the application.
  *
- * @since 1.0.0
- *
  * @returns The component to be rendered.
  */
 export function ShortcutsRegister() {

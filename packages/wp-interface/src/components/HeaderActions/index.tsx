@@ -12,8 +12,6 @@ const { Fill, Slot } = createSlotFill( 'HeaderActions' );
  *
  * Any children passed to this component will be rendered inside the header actions area.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */
@@ -31,8 +29,6 @@ export const HeaderActions = Object.assign( InternalHeaderActions, {
 
 /**
  * Hook to check whether any fills are provided for the HeaderActions slot.
- *
- * @since 1.0.0
  *
  * @returns True if there are any HeaderActions fills, false otherwise.
  */

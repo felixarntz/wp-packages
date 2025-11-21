@@ -13,8 +13,6 @@ import type { SidebarProps } from './types';
  * Additionally, sidebars can be pinned by the user for easy access. The PinnedSidebars component can be used to render
  * icon buttons for the pinned sidebars.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */
@@ -68,8 +66,6 @@ export const Sidebar = Object.assign( InternalSidebar, {
 
 /**
  * Hook to check whether any fills are provided for the Sidebar slot.
- *
- * @since 1.0.0
  *
  * @returns True if there are any Sidebar fills, false otherwise.
  */

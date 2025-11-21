@@ -9,8 +9,6 @@ import type { AppProps } from './types';
 /**
  * Renders the root of the application.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */

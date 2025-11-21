@@ -50,8 +50,6 @@ function sanitizeNavigateRegions(
 /**
  * Renders the application interface wrapper.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */

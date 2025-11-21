@@ -56,8 +56,6 @@ const MAX_VISIBLE_NOTICES = -3;
  *
  * This only includes notices added with the type 'snackbar'.
  *
- * @since 1.0.0
- *
  * @returns The component to be rendered.
  */
 export function Snackbars() {

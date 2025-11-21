@@ -9,8 +9,6 @@ import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
  * By default, distraction free mode is disabled and can only be enabled via shortcut.
  * This component can be rendered in any menu to allow users to toggle the distraction free mode intuitively in the UI.
  *
- * @since 1.0.0
- *
  * @returns The component to be rendered.
  */
 export function DistractionFreePreferenceToggleMenuItem() {

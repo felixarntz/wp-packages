@@ -41,8 +41,6 @@ const actions = {
 	/**
 	 * Opens a sidebar.
 	 *
-	 * @since 1.0.0
-	 *
 	 * @param sidebarId - Sidebar identifier.
 	 * @returns Action creator.
 	 */
@@ -56,8 +54,6 @@ const actions = {
 
 	/**
 	 * Closes the currently open sidebar (if any).
-	 *
-	 * @since 1.0.0
 	 *
 	 * @returns Action creator.
 	 */
@@ -74,8 +70,6 @@ const actions = {
 	 *
 	 * If the sidebar is active, it will be closed.
 	 * If the sidebar is closed or another sidebar is active, it will be opened.
-	 *
-	 * @since 1.0.0
 	 *
 	 * @param sidebarId - Sidebar identifier.
 	 * @returns Action creator.
@@ -96,8 +90,6 @@ const actions = {
 	 * If a sidebar is active, it will be closed.
 	 * If no sidebar is active, the default sidebar will be opened.
 	 *
-	 * @since 1.0.0
-	 *
 	 * @returns Action creator.
 	 */
 	toggleDefaultSidebar() {
@@ -117,8 +109,6 @@ const actions = {
 	/**
 	 * Sets the default sidebar.
 	 *
-	 * @since 1.0.0
-	 *
 	 * @param sidebarId - Sidebar identifier.
 	 * @returns Action creator.
 	 */
@@ -136,8 +126,6 @@ const actions = {
 
 /**
  * Reducer for the store mutations.
- *
- * @since 1.0.0
  *
  * @param state  - Current state.
  * @param action - Action object.

@@ -12,8 +12,6 @@ const { Fill, Slot } = createSlotFill( 'Header' );
  *
  * Any children passed to this component will be rendered inside the header.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */
@@ -29,8 +27,6 @@ export const Header = Object.assign( InternalHeader, {
 
 /**
  * Hook to check whether any fills are provided for the Header slot.
- *
- * @since 1.0.0
  *
  * @returns True if there are any Header fills, false otherwise.
  */

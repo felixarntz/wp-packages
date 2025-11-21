@@ -16,8 +16,6 @@ const { Fill, Slot } = createSlotFill( 'Modal' );
  *
  * Multiple modals can be rendered, but only one can be active at a time.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */
@@ -55,8 +53,6 @@ export const Modal = Object.assign( InternalModal, {
 
 /**
  * Hook to check whether any fills are provided for the Modal slot.
- *
- * @since 1.0.0
  *
  * @returns True if there are any Modal fills, false otherwise.
  */

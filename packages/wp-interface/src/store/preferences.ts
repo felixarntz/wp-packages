@@ -30,8 +30,6 @@ const actions = {
 	/**
 	 * Sets a preference.
 	 *
-	 * @since 1.0.0
-	 *
 	 * @param name  - Preference name.
 	 * @param value - Preference value.
 	 * @returns Action creator.
@@ -46,8 +44,6 @@ const actions = {
 
 	/**
 	 * Toggles a preference.
-	 *
-	 * @since 1.0.0
 	 *
 	 * @param name - Preference name.
 	 * @returns Action creator.

@@ -58,8 +58,6 @@ function prepareNoticeForNoticeProps( notice: WPNotice ): NoticeProps {
  * This only includes notices added with the type 'default'.
  * Non-dismissible notices are rendered in a separate list from dismissible notices.
  *
- * @since 1.0.0
- *
  * @returns The component to be rendered.
  */
 export function Notices() {

@@ -21,8 +21,6 @@ import type {
 /**
  * Renders a shortcut key combination.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */
@@ -67,8 +65,6 @@ function KeyCombination( props: KeyCombinationProps ) {
 
 /**
  * Renders a shortcut.
- *
- * @since 1.0.0
  *
  * @param props - Component props.
  * @returns The component to be rendered.
@@ -119,8 +115,6 @@ function Shortcut( props: ShortcutProps ) {
 /**
  * Renders a list of shortcuts.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */
@@ -153,8 +147,6 @@ function ShortcutList( props: ShortcutListProps ) {
 /**
  * Renders a section for a group of shortcuts.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */
@@ -181,8 +173,6 @@ function ShortcutSection( props: ShortcutSectionProps ) {
 /**
  * Renders a section for a category of shortcuts.
  *
- * @since 1.0.0
- *
  * @param props - Component props.
  * @returns The component to be rendered.
  */
@@ -203,8 +193,6 @@ function ShortcutCategorySection( props: ShortcutCategorySectionProps ) {
 
 /**
  * Renders the modal displaying the available keyboard shortcuts.
- *
- * @since 1.0.0
  *
  * @returns The component to be rendered.
  */

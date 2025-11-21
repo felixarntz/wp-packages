@@ -7,8 +7,6 @@ import { store as interfaceStore } from '../../store';
 /**
  * Renders a menu item to open the keyboard shortcuts help modal.
  *
- * @since 1.0.0
- *
  * @returns The component to be rendered.
  */
 export function KeyboardShortcutsMenuItem() {
