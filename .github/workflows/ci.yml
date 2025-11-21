@@ -48,12 +48,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # needed so that cross-dependencies are built before type checking
       - name: Build project
-        run: npm run build
-
-      - name: Run TypeScript type check
-        run: npm run typecheck
+        run: npm run build:package-types
 
   unittest_matrix:
     name: 'Unit Test (Vitest) - Node.js ${{ matrix.node-version }}'
