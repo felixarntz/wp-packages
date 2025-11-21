@@ -1,0 +1,13 @@
+{
+	"extends": "../../tsconfig.base.json",
+	"compilerOptions": {
+		"types": [
+			"wordpress__interface",
+			"wordpress__keyboard-shortcuts",
+			"wordpress__preferences"
+		]
+	},
+	"references": [
+		{ "path": "../wp-store-utils" }
+	]
+}

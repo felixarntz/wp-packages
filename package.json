@@ -1,0 +1,66 @@
+{
+	"private": true,
+	"name": "@felixarntz/wp-root",
+	"workspaces": [
+		"packages/*"
+	],
+	"license": "GPL-2.0-or-later",
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"homepage": "https://github.com/felixarntz/wp-packages#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/felixarntz/wp-packages.git"
+	},
+	"bugs": {
+		"url": "https://github.com/felixarntz/wp-packages/issues"
+	},
+	"wpPlugin": {
+		"scriptGlobal": false,
+		"packageNamespace": "felixarntz"
+	},
+	"dependencies": {
+		"@wordpress/components": "^30.8.0",
+		"@wordpress/compose": "^7.35.0",
+		"@wordpress/data": "^10.35.0",
+		"@wordpress/editor": "^14.35.0",
+		"@wordpress/element": "^6.35.0",
+		"@wordpress/i18n": "^6.8.0",
+		"@wordpress/interface": "^9.20.0",
+		"@wordpress/keyboard-shortcuts": "^5.35.0",
+		"@wordpress/keycodes": "^4.35.0",
+		"@wordpress/notices": "^5.35.0",
+		"@wordpress/preferences": "^4.35.0",
+		"clsx": "^2.1.1"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.38.0",
+		"@types/node": "^24.9.1",
+		"@wordpress/build": "^0.3.0",
+		"@wordpress/eslint-plugin": "^22.21.0",
+		"eslint": "^9.38.0",
+		"eslint-config-prettier": "^10.1.8",
+		"eslint-import-resolver-typescript": "^4.4.4",
+		"eslint-plugin-import": "^2.32.0",
+		"eslint-plugin-jsdoc": "^57.2.1",
+		"eslint-plugin-jsx-a11y": "^6.10.0",
+		"eslint-plugin-prettier": "^5.5.0",
+		"eslint-plugin-tsdoc": "^0.5.0",
+		"globals": "^16.4.0",
+		"prettier": "npm:wp-prettier@^3.0.3",
+		"typescript-eslint": "^8.46.2",
+		"typedoc": "^0.28.4",
+		"typescript": "^5.8.3"
+	},
+	"scripts": {
+		"build": "npm run build:package-types && npm run build:packages",
+		"build:packages": "wp-build",
+		"build:package-types": "tsc --build",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix",
+		"lint:ci": "eslint . --max-warnings 0",
+		"format": "prettier --check packages",
+		"format:fix": "prettier --experimental-cli --write packages"
+	}
+}

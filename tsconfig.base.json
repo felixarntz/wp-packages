@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		"emitDeclarationOnly": true,
+		"strict": true,
+		"esModuleInterop": false,
+		"skipLibCheck": true,
+		"noImplicitAny": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"forceConsistentCasingInFileNames": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUnusedLocals": true,
+		"strictBindCallApply": true,
+		"strictFunctionTypes": true,
+		"strictNullChecks": true,
+		"strictPropertyInitialization": true,
+		"resolveJsonModule": true,
+		"sourceMap": true,
+		"composite": true,
+		"declaration": true,
+		"allowSyntheticDefaultImports": true,
+		"verbatimModuleSyntax": true,
+		"lib": [ "dom", "dom.iterable", "esnext" ],
+		"jsx": "preserve",
+		"target": "esnext",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"typeRoots": [ "./typings", "./node_modules/@types" ],
+		"types": [],
+		"rootDir": "${configDir}/src",
+		"declarationDir": "${configDir}/build-types"
+	},
+	"include": [ "${configDir}/src" ],
+	"exclude": [
+		"packages/*/build-*/**",
+		"packages/*/build/**"
+	]
+}

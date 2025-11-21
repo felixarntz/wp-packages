@@ -1,0 +1,49 @@
+{
+	"name": "@felixarntz/wp-interface",
+	"version": "1.0.0-beta.1",
+	"description": "Foundational components for implementing a WordPress screen reusing UI patterns from the block editor.",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"module": "build-module/index.js",
+	"types": "build-types",
+	"files": [
+		"build/**/*",
+		"build-module/**/*",
+		"build-style/**/*",
+		"build-types/**/*"
+	],
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"homepage": "https://github.com/felixarntz/wp-packages#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/felixarntz/wp-packages.git",
+		"directory": "packages/wp-interface"
+	},
+	"bugs": {
+		"url": "https://github.com/felixarntz/wp-packages/issues"
+	},
+	"dependencies": {
+		"@felixarntz/wp-store-utils": "file:../wp-store-utils",
+		"@wordpress/components": "^30.8.0",
+		"@wordpress/compose": "^7.35.0",
+		"@wordpress/data": "^10.35.0",
+		"@wordpress/editor": "^14.35.0",
+		"@wordpress/element": "^6.35.0",
+		"@wordpress/i18n": "^6.8.0",
+		"@wordpress/interface": "^9.20.0",
+		"@wordpress/keyboard-shortcuts": "^5.35.0",
+		"@wordpress/keycodes": "^4.35.0",
+		"@wordpress/notices": "^5.35.0",
+		"@wordpress/preferences": "^4.35.0",
+		"clsx": "^2.1.1"
+	},
+	"peerDependencies": {
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

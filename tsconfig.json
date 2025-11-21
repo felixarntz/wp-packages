@@ -1,0 +1,7 @@
+{
+	"files": [],
+	"references": [
+		{ "path": "packages/wp-interface" },
+		{ "path": "packages/wp-store-utils" }
+	]
+}

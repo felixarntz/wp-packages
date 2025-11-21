@@ -1,0 +1,36 @@
+{
+	"name": "@felixarntz/wp-store-utils",
+	"version": "1.0.0-beta.1",
+	"description": "Utility functions and types for working with WordPress data stores.",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"module": "build-module/index.js",
+	"types": "build-types",
+	"files": [
+		"build/**/*",
+		"build-module/**/*",
+		"build-types/**/*"
+	],
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"homepage": "https://github.com/felixarntz/wp-packages#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/felixarntz/wp-packages.git",
+		"directory": "packages/wp-store-utils"
+	},
+	"bugs": {
+		"url": "https://github.com/felixarntz/wp-packages/issues"
+	},
+	"dependencies": {
+		"@wordpress/data": "^10.35.0"
+	},
+	"peerDependencies": {
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
