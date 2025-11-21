@@ -1,4 +1,4 @@
-# My personal WordPress NPM packages
+# My WordPress NPM packages
 
 This monorepo contains various WordPress NPM packages I maintain.
 
