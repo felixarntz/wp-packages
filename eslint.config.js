@@ -7,6 +7,7 @@ import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import jsdocPlugin from 'eslint-plugin-jsdoc';
 import tsdocPlugin from 'eslint-plugin-tsdoc';
 import prettierPlugin from 'eslint-plugin-prettier';
+import vitestPlugin from '@vitest/eslint-plugin';
 import wordpressPlugin from '@wordpress/eslint-plugin';
 import globals from 'globals';
 
@@ -155,6 +156,19 @@ export default defineConfig(
       'prefer-arrow-callback': 'error',
       'prefer-const': ['error', { destructuring: 'all' }],
       radix: 'error',
+    },
+  },
+
+  // Test files.
+  {
+    files: ['packages/*/src/**/*.test.{ts,tsx}'],
+    plugins: {
+      vitest: vitestPlugin,
+    },
+    rules: {
+      ...vitestPlugin.configs.recommended.rules,
+      'vitest/expect-expect': 'off',
+      'vitest/no-commented-out-tests': 'off',
     },
   },
 
