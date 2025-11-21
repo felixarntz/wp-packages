@@ -59,8 +59,6 @@
 		"build:package-types": "tsc --build",
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
-		"lint:ci": "eslint . --max-warnings 0",
-		"format": "prettier --check packages",
-		"format:fix": "prettier --experimental-cli --write packages"
+		"lint:ci": "eslint . --max-warnings 0"
 	}
 }

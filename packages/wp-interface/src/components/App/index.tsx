@@ -14,9 +14,7 @@ import type { AppProps } from './types';
  * @param props - Component props.
  * @returns The component to be rendered.
  */
-export function App(
-	props: WordPressComponentProps< AppProps, null >
-) {
+export function App( props: WordPressComponentProps< AppProps, null > ) {
 	const { className, labels, children } = props;
 
 	return (

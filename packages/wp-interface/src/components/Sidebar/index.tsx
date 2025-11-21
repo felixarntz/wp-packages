@@ -1,7 +1,5 @@
 import { ComplementaryArea } from '@wordpress/interface';
-import {
-	__experimentalUseSlotFills as useSlotFills,
-} from '@wordpress/components';
+import { __experimentalUseSlotFills as useSlotFills } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
