@@ -90,11 +90,11 @@ export function Notices() {
 		<>
 			<NoticeList
 				notices={ nonDismissibleNotices }
-				className="ais-notices__pinned"
+				className="wp-interface-notices__pinned"
 			/>
 			<NoticeList
 				notices={ dismissibleNotices }
-				className="ais-notices__dismissible"
+				className="wp-interface-notices__dismissible"
 				onRemove={ removeNotice }
 			/>
 		</>

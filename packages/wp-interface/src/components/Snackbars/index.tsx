@@ -75,7 +75,7 @@ export function Snackbars() {
 	return (
 		<SnackbarList
 			notices={ snackbarNotices }
-			className="ais-notices__snackbar"
+			className="wp-interface-notices__snackbar"
 			onRemove={ removeNotice }
 		/>
 	);

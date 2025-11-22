@@ -118,11 +118,11 @@ export function Interface(
 
 	const hasHeader = useHasHeader();
 	const header = hasHeader && (
-		<div className="ais-header">
-			<div className="ais-header__left">
+		<div className="wp-interface-header">
+			<div className="wp-interface-header__left">
 				<Header.Slot />
 			</div>
-			<div className="ais-header__right">
+			<div className="wp-interface-header__right">
 				<HeaderActions.Slot />
 			</div>
 		</div>
@@ -130,7 +130,7 @@ export function Interface(
 
 	const hasFooter = useHasFooter();
 	const footer = hasFooter && (
-		<div className="ais-footer">
+		<div className="wp-interface-footer">
 			<Footer.Slot />
 		</div>
 	);
@@ -142,7 +142,7 @@ export function Interface(
 		<div { ...navigateRegionsProps } ref={ navigateRegionsProps.ref }>
 			<InterfaceSkeleton
 				isDistractionFree={ isDistractionFree }
-				className={ clsx( 'ais-interface', className, {
+				className={ clsx( 'wp-interface-interface', className, {
 					'is-distraction-free': isDistractionFree,
 				} ) }
 				labels={ labels }
