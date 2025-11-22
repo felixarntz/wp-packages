@@ -1,0 +1,20 @@
+.wp-interface-error-boundary {
+	display: flex;
+    align-items: baseline;
+    flex-flow: wrap;
+    gap: 16px;
+    justify-content: space-between;
+	margin: auto;
+	max-width: 780px;
+	padding: 1em;
+	margin-top: 64px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08), 0 15px 27px rgba(0, 0, 0, 0.07), 0 30px 36px rgba(0, 0, 0, 0.04), 0 50px 43px rgba(0, 0, 0, 0.02);
+	border: 1px solid #1e1e1e;
+	border-radius: 2px;
+	background-color: #fff;
+
+	> p {
+		margin: 0;
+		text-wrap: pretty;
+	}
+}

@@ -1,6 +1,6 @@
 import { SlotFillProvider } from '@wordpress/components';
-import { ErrorBoundary } from '@wordpress/editor';
 import type { WordPressComponentProps } from '@wordpress/components/build-types/context';
+import { ErrorBoundary } from '../ErrorBoundary';
 import { Interface } from '../Interface';
 import { InterfaceScopeProvider } from '../InterfaceScopeProvider';
 import { ShortcutsRegister } from '../ShortcutsRegister';
