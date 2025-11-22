@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { Fragment } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 import {
 	useShortcut,
 	store as keyboardShortcutsStore,
@@ -16,7 +15,13 @@ import type {
 	ShortcutListProps,
 	ShortcutSectionProps,
 	ShortcutCategorySectionProps,
+	KeyboardShortcutsHelpModalProps,
 } from './types';
+
+const DEFAULT_LABELS = {
+	modalTitle: 'Keyboard shortcuts',
+	globalSectionTitle: 'Global shortcuts',
+};
 
 /**
  * Renders a shortcut key combination.
@@ -194,9 +199,13 @@ function ShortcutCategorySection( props: ShortcutCategorySectionProps ) {
 /**
  * Renders the modal displaying the available keyboard shortcuts.
  *
+ * @param props - Component props.
  * @returns The component to be rendered.
  */
-export function KeyboardShortcutsHelpModal() {
+export function KeyboardShortcutsHelpModal(
+	props: KeyboardShortcutsHelpModalProps = {}
+) {
+	const { labels } = props;
 	const { toggleModal } = useDispatch( interfaceStore );
 
 	useShortcut( 'ai-services/keyboard-shortcuts', () =>
@@ -206,12 +215,15 @@ export function KeyboardShortcutsHelpModal() {
 	return (
 		<Modal
 			identifier="keyboard-shortcuts-help"
-			title={ __( 'Keyboard shortcuts', 'ai-services' ) }
+			title={ labels?.modalTitle ?? DEFAULT_LABELS.modalTitle }
 			className="editor-keyboard-shortcut-help-modal"
 		>
 			<ShortcutCategorySection categoryName="main" />
 			<ShortcutCategorySection
-				title={ __( 'Global shortcuts', 'ai-services' ) }
+				title={
+					labels?.globalSectionTitle ??
+					DEFAULT_LABELS.globalSectionTitle
+				}
 				categoryName="global"
 			/>
 		</Modal>

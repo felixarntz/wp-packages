@@ -22,3 +22,12 @@ export type ShortcutCategorySectionProps = {
 	title?: string;
 	categoryName: string;
 };
+
+export type KeyboardShortcutsHelpModalLabels = {
+	modalTitle?: string;
+	globalSectionTitle?: string;
+};
+
+export type KeyboardShortcutsHelpModalProps = {
+	labels?: KeyboardShortcutsHelpModalLabels;
+};

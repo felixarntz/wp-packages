@@ -4,7 +4,6 @@ import {
 	Modal as CoreModal,
 } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
 import type { WordPressComponentProps } from '@wordpress/components/build-types/context';
 import { store as interfaceStore } from '../../store';
 import type { ModalProps } from './types';
@@ -20,7 +19,13 @@ const { Fill, Slot } = createSlotFill( 'Modal' );
  * @returns The component to be rendered.
  */
 function InternalModal( props: WordPressComponentProps< ModalProps, 'div' > ) {
-	const { identifier, title, children, ...additionalProps } = props;
+	const {
+		identifier,
+		title,
+		children,
+		closeButtonLabel,
+		...additionalProps
+	} = props;
 
 	const isModalActive = useSelect(
 		( select ) =>
@@ -37,7 +42,7 @@ function InternalModal( props: WordPressComponentProps< ModalProps, 'div' > ) {
 		<Fill>
 			<CoreModal
 				title={ title }
-				closeButtonLabel={ __( 'Close modal', 'ai-services' ) }
+				closeButtonLabel={ closeButtonLabel ?? 'Close modal' }
 				onRequestClose={ closeModal }
 				{ ...additionalProps }
 			>

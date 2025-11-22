@@ -9,4 +9,6 @@ export type SidebarProps = Pick<
 	| 'header'
 	| 'isPinnable'
 	| 'isActiveByDefault'
->;
+> & {
+	closeButtonLabel?: string;
+};

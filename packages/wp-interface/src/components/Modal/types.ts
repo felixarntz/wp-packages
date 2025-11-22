@@ -4,4 +4,5 @@ export type ModalProps = {
 	identifier: string;
 	title: string;
 	children: ReactNode;
+	closeButtonLabel?: string;
 };

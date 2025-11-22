@@ -1,9 +1,8 @@
 import { ComplementaryArea } from '@wordpress/interface';
 import { __experimentalUseSlotFills as useSlotFills } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { __ } from '@wordpress/i18n';
-import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
 import type { WordPressComponentProps } from '@wordpress/components/build-types/context';
+import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
 import type { SidebarProps } from './types';
 
 /**
@@ -27,6 +26,7 @@ function InternalSidebar(
 		isPinnable,
 		isActiveByDefault,
 		children,
+		closeButtonLabel,
 	} = props;
 
 	const shortcut = useSelect(
@@ -48,7 +48,7 @@ function InternalSidebar(
 			isPinnable={ isPinnable }
 			isActiveByDefault={ isActiveByDefault }
 			toggleShortcut={ shortcut ?? undefined }
-			closeLabel={ __( 'Close sidebar', 'ai-services' ) }
+			closeLabel={ closeButtonLabel ?? 'Close sidebar' }
 		>
 			{ children }
 		</ComplementaryArea>
