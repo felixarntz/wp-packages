@@ -6,6 +6,7 @@ import {
 import { useSelect, useDispatch } from '@wordpress/data';
 import type { WordPressComponentProps } from '@wordpress/components/build-types/context';
 import { store as interfaceStore } from '../../store';
+import { useInterfaceScope } from '../InterfaceScopeProvider';
 import type { ModalProps } from './types';
 
 const { Fill, Slot } = createSlotFill( 'Modal' );
@@ -26,11 +27,12 @@ function InternalModal( props: WordPressComponentProps< ModalProps, 'div' > ) {
 		closeButtonLabel,
 		...additionalProps
 	} = props;
+	const scope = useInterfaceScope();
 
 	const isModalActive = useSelect(
 		( select ) =>
-			select( interfaceStore ).isModalActive( 'ai-services', identifier ),
-		[ identifier ]
+			select( interfaceStore ).isModalActive( scope, identifier ),
+		[ identifier, scope ]
 	);
 	const { closeModal } = useDispatch( interfaceStore );
 

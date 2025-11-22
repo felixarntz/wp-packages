@@ -2,6 +2,7 @@ import { MenuItem } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
 import { store as interfaceStore } from '../../store';
+import { useInterfaceScope } from '../InterfaceScopeProvider';
 import type { KeyboardShortcutsMenuItemProps } from './types';
 
 const DEFAULT_LABELS = {
@@ -17,15 +18,16 @@ const DEFAULT_LABELS = {
 export function KeyboardShortcutsMenuItem(
 	props: KeyboardShortcutsMenuItemProps = {}
 ) {
-	const { labels } = props;
+	const { menuItemLabel } = props;
+	const scope = useInterfaceScope();
 	const { openModal } = useDispatch( interfaceStore );
 	const shortcut = useSelect(
 		( select ) =>
 			select( keyboardShortcutsStore ).getShortcutRepresentation(
-				'ai-services/keyboard-shortcuts',
+				`${ scope }/keyboard-shortcuts`,
 				'display'
 			),
-		[]
+		[ scope ]
 	);
 
 	if ( ! shortcut ) {
@@ -34,12 +36,10 @@ export function KeyboardShortcutsMenuItem(
 
 	return (
 		<MenuItem
-			onClick={ () =>
-				openModal( 'ai-services', 'keyboard-shortcuts-help' )
-			}
+			onClick={ () => openModal( scope, 'keyboard-shortcuts-help' ) }
 			shortcut={ shortcut }
 		>
-			{ labels?.menuItemLabel ?? DEFAULT_LABELS.menuItemLabel }
+			{ menuItemLabel ?? DEFAULT_LABELS.menuItemLabel }
 		</MenuItem>
 	);
 }

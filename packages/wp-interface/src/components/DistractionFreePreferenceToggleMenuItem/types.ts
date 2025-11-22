@@ -1,10 +1,6 @@
-export type DistractionFreePreferenceToggleMenuItemLabels = {
+export type DistractionFreePreferenceToggleMenuItemProps = {
 	menuItemLabel?: string;
 	menuItemInfo?: string;
 	messageActivated?: string;
 	messageDeactivated?: string;
-};
-
-export type DistractionFreePreferenceToggleMenuItemProps = {
-	labels?: DistractionFreePreferenceToggleMenuItemLabels;
 };

@@ -1,4 +1,5 @@
 import { PinnedItems } from '@wordpress/interface';
+import { useInterfaceScope } from '../InterfaceScopeProvider';
 
 /**
  * Renders the container for any pinned sidebars.
@@ -9,5 +10,6 @@ import { PinnedItems } from '@wordpress/interface';
  * @returns The component to be rendered.
  */
 export function PinnedSidebars() {
-	return <PinnedItems.Slot scope="ai-services" />;
+	const scope = useInterfaceScope();
+	return <PinnedItems.Slot scope={ scope } />;
 }

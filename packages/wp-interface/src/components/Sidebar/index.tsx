@@ -3,6 +3,7 @@ import { __experimentalUseSlotFills as useSlotFills } from '@wordpress/component
 import { useSelect } from '@wordpress/data';
 import type { WordPressComponentProps } from '@wordpress/components/build-types/context';
 import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useInterfaceScope } from '../InterfaceScopeProvider';
 import type { SidebarProps } from './types';
 
 /**
@@ -28,19 +29,20 @@ function InternalSidebar(
 		children,
 		closeButtonLabel,
 	} = props;
+	const scope = useInterfaceScope();
 
 	const shortcut = useSelect(
 		( select ) =>
 			select( keyboardShortcutsStore ).getShortcutRepresentation(
-				'ai-services/toggle-sidebar',
+				`${ scope }/toggle-sidebar`,
 				'display'
 			),
-		[]
+		[ scope ]
 	);
 
 	return (
 		<ComplementaryArea
-			scope="ai-services"
+			scope={ scope }
 			identifier={ identifier }
 			title={ title }
 			icon={ icon }
@@ -56,7 +58,8 @@ function InternalSidebar(
 }
 
 const InternalSidebarSlot = () => {
-	return <ComplementaryArea.Slot scope="ai-services" />;
+	const scope = useInterfaceScope();
+	return <ComplementaryArea.Slot scope={ scope } />;
 };
 
 export const Sidebar = Object.assign( InternalSidebar, {
@@ -70,6 +73,7 @@ export const Sidebar = Object.assign( InternalSidebar, {
  * @returns True if there are any Sidebar fills, false otherwise.
  */
 export function useHasSidebar() {
-	const fills = useSlotFills( 'ComplementaryArea/ai-services' );
+	const scope = useInterfaceScope();
+	const fills = useSlotFills( `ComplementaryArea/${ scope }` );
 	return !! fills?.length;
 }

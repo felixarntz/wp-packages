@@ -18,6 +18,7 @@ import { Sidebar, useHasSidebar } from '../Sidebar';
 import { Modal } from '../Modal';
 import { Notices } from '../Notices';
 import { Snackbars } from '../Snackbars';
+import { useInterfaceScope } from '../InterfaceScopeProvider';
 import type { InterfaceProps } from './types';
 
 /**
@@ -57,6 +58,7 @@ export function Interface(
 	props: WordPressComponentProps< InterfaceProps, null >
 ) {
 	const { className, labels, children } = props;
+	const scope = useInterfaceScope();
 
 	const isLargeViewport = useViewportMatch( 'medium' );
 
@@ -74,18 +76,15 @@ export function Interface(
 			select( interfaceStore );
 
 		return {
-			isDistractionFree: !! getPreference(
-				'ai-services',
-				'distractionFree'
-			),
+			isDistractionFree: !! getPreference( scope, 'distractionFree' ),
 			navigatePreviousRegionShortcut: getAllShortcutKeyCombinations(
-				'ai-services/previous-region'
+				`${ scope }/previous-region`
 			),
 			navigateNextRegionShortcut: getAllShortcutKeyCombinations(
-				'ai-services/next-region'
+				`${ scope }/next-region`
 			),
-			activeSidebar: getActiveSidebar( 'ai-services' ),
-			defaultSidebar: getDefaultSidebar( 'ai-services' ),
+			activeSidebar: getActiveSidebar( scope ),
+			defaultSidebar: getDefaultSidebar( scope ),
 		};
 	}, [] );
 
@@ -94,16 +93,16 @@ export function Interface(
 
 	useEffect( () => {
 		if ( activeSidebar && ! defaultSidebar ) {
-			setDefaultSidebar( 'ai-services', activeSidebar );
+			setDefaultSidebar( scope, activeSidebar );
 		}
-	}, [ activeSidebar, defaultSidebar, setDefaultSidebar ] );
+	}, [ activeSidebar, defaultSidebar, setDefaultSidebar, scope ] );
 
-	useShortcut( 'ai-services/toggle-distraction-free', () => {
-		togglePreference( 'ai-services', 'distractionFree' );
+	useShortcut( `${ scope }/toggle-distraction-free`, () => {
+		togglePreference( scope, 'distractionFree' );
 	} );
 
-	useShortcut( 'ai-services/toggle-sidebar', () => {
-		toggleDefaultSidebar( 'ai-services' );
+	useShortcut( `${ scope }/toggle-sidebar`, () => {
+		toggleDefaultSidebar( scope );
 	} );
 
 	const navigateRegionsInput = useMemo(

@@ -9,6 +9,7 @@ import { displayShortcutList, shortcutAriaLabel } from '@wordpress/keycodes';
 import type { WPKeycodeModifier } from '@wordpress/keycodes';
 import { store as interfaceStore } from '../../store';
 import { Modal } from '../Modal';
+import { useInterfaceScope } from '../InterfaceScopeProvider';
 import type {
 	KeyCombinationProps,
 	ShortcutProps,
@@ -206,10 +207,11 @@ export function KeyboardShortcutsHelpModal(
 	props: KeyboardShortcutsHelpModalProps = {}
 ) {
 	const { labels } = props;
+	const scope = useInterfaceScope();
 	const { toggleModal } = useDispatch( interfaceStore );
 
-	useShortcut( 'ai-services/keyboard-shortcuts', () =>
-		toggleModal( 'ai-services', 'keyboard-shortcuts-help' )
+	useShortcut( `${ scope }/keyboard-shortcuts`, () =>
+		toggleModal( scope, 'keyboard-shortcuts-help' )
 	);
 
 	return (

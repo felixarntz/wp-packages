@@ -1,6 +1,7 @@
 import { useSelect } from '@wordpress/data';
 import { PreferenceToggleMenuItem } from '@wordpress/preferences';
 import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
+import { useInterfaceScope } from '../InterfaceScopeProvider';
 import type { DistractionFreePreferenceToggleMenuItemProps } from './types';
 
 const DEFAULT_LABELS = {
@@ -22,14 +23,20 @@ const DEFAULT_LABELS = {
 export function DistractionFreePreferenceToggleMenuItem(
 	props: DistractionFreePreferenceToggleMenuItemProps = {}
 ) {
-	const { labels } = props;
+	const {
+		menuItemLabel,
+		menuItemInfo,
+		messageActivated,
+		messageDeactivated,
+	} = props;
+	const scope = useInterfaceScope();
 	const shortcut = useSelect(
 		( select ) =>
 			select( keyboardShortcutsStore ).getShortcutRepresentation(
-				'ai-services/toggle-distraction-free',
+				`${ scope }/toggle-distraction-free`,
 				'display'
 			),
-		[]
+		[ scope ]
 	);
 
 	if ( ! shortcut ) {
@@ -38,15 +45,15 @@ export function DistractionFreePreferenceToggleMenuItem(
 
 	return (
 		<PreferenceToggleMenuItem
-			scope="ai-services"
+			scope={ scope }
 			name="distractionFree"
-			label={ labels?.menuItemLabel ?? DEFAULT_LABELS.menuItemLabel }
-			info={ labels?.menuItemInfo ?? DEFAULT_LABELS.menuItemInfo }
+			label={ menuItemLabel ?? DEFAULT_LABELS.menuItemLabel }
+			info={ menuItemInfo ?? DEFAULT_LABELS.menuItemInfo }
 			messageActivated={
-				labels?.messageActivated ?? DEFAULT_LABELS.messageActivated
+				messageActivated ?? DEFAULT_LABELS.messageActivated
 			}
 			messageDeactivated={
-				labels?.messageDeactivated ?? DEFAULT_LABELS.messageDeactivated
+				messageDeactivated ?? DEFAULT_LABELS.messageDeactivated
 			}
 			shortcut={ shortcut }
 		/>
