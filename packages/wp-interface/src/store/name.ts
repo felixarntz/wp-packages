@@ -1,1 +1,1 @@
-export const STORE_NAME = 'ai-services/interface';
+export const STORE_NAME = 'wp-interface';

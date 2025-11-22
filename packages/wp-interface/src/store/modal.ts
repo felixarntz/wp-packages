@@ -30,14 +30,15 @@ const actions = {
 	/**
 	 * Opens a modal.
 	 *
+	 * @param scope - Modal scope.
 	 * @param modalId - Modal identifier.
 	 * @returns Action creator.
 	 */
-	openModal( modalId: string ) {
+	openModal( scope: string, modalId: string ) {
 		return ( { registry }: DispatcherArgs ) => {
 			registry
 				.dispatch( interfaceStore )
-				.openModal( `ai-services/${ modalId }` );
+				.openModal( `${ scope }/${ modalId }` );
 		};
 	},
 
@@ -58,15 +59,16 @@ const actions = {
 	 * If the modal is active, it will be closed.
 	 * If the modal is closed or another modal is active, it will be opened.
 	 *
+	 * @param scope - Modal scope.
 	 * @param modalId - Modal identifier.
 	 * @returns Action creator.
 	 */
-	toggleModal( modalId: string ) {
+	toggleModal( scope: string, modalId: string ) {
 		return ( { dispatch, select }: DispatcherArgs ) => {
-			if ( select.isModalActive( modalId ) ) {
+			if ( select.isModalActive( scope, modalId ) ) {
 				dispatch.closeModal();
 			} else {
-				dispatch.openModal( modalId );
+				dispatch.openModal( scope, modalId );
 			}
 		};
 	},
@@ -74,9 +76,9 @@ const actions = {
 
 const selectors = {
 	isModalActive: createRegistrySelector(
-		( select ) => ( _state: State, modalId: string ) => {
+		( select ) => ( _state: State, scope: string, modalId: string ) => {
 			return select( interfaceStore ).isModalActive(
-				`ai-services/${ modalId }`
+				`${ scope }/${ modalId }`
 			);
 		}
 	),

@@ -74,11 +74,11 @@ describe( 'preferences store', () => {
 
 				mockPreferencesSelectors.get.mockReturnValue( 'some-value' );
 
-				const result = selector( {}, 'some-preference' );
+				const result = selector( {}, 'test-scope', 'some-preference' );
 
 				expect( mockSelect ).toHaveBeenCalledWith( preferencesStore );
 				expect( mockPreferencesSelectors.get ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'some-preference'
 				);
 				expect( result ).toBe( 'some-value' );
@@ -90,6 +90,7 @@ describe( 'preferences store', () => {
 		describe( 'setPreference', () => {
 			it( 'dispatches to the preferences store set action', () => {
 				const thunk = storeConfig.actions!.setPreference(
+					'test-scope',
 					'some-preference',
 					'some-value'
 				);
@@ -103,7 +104,7 @@ describe( 'preferences store', () => {
 					preferencesStore
 				);
 				expect( mockPreferencesDispatchers.set ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'some-preference',
 					'some-value'
 				);
@@ -114,8 +115,10 @@ describe( 'preferences store', () => {
 			it( 'toggles the preference value from true to false', () => {
 				mockSelectors.getPreference.mockReturnValue( true );
 
-				const thunk =
-					storeConfig.actions!.togglePreference( 'some-preference' );
+				const thunk = storeConfig.actions!.togglePreference(
+					'test-scope',
+					'some-preference'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -123,13 +126,14 @@ describe( 'preferences store', () => {
 				} );
 
 				expect( mockSelectors.getPreference ).toHaveBeenCalledWith(
+					'test-scope',
 					'some-preference'
 				);
 				expect( mockRegistry.dispatch ).toHaveBeenCalledWith(
 					preferencesStore
 				);
 				expect( mockPreferencesDispatchers.set ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'some-preference',
 					false
 				);
@@ -138,8 +142,10 @@ describe( 'preferences store', () => {
 			it( 'toggles the preference value from false to true', () => {
 				mockSelectors.getPreference.mockReturnValue( false );
 
-				const thunk =
-					storeConfig.actions!.togglePreference( 'some-preference' );
+				const thunk = storeConfig.actions!.togglePreference(
+					'test-scope',
+					'some-preference'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -147,13 +153,14 @@ describe( 'preferences store', () => {
 				} );
 
 				expect( mockSelectors.getPreference ).toHaveBeenCalledWith(
+					'test-scope',
 					'some-preference'
 				);
 				expect( mockRegistry.dispatch ).toHaveBeenCalledWith(
 					preferencesStore
 				);
 				expect( mockPreferencesDispatchers.set ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'some-preference',
 					true
 				);

@@ -30,38 +30,38 @@ const actions = {
 	/**
 	 * Sets a preference.
 	 *
+	 * @param scope - Scope identifier.
 	 * @param name  - Preference name.
 	 * @param value - Preference value.
 	 * @returns Action creator.
 	 */
-	setPreference( name: string, value: unknown ) {
+	setPreference( scope: string, name: string, value: unknown ) {
 		return ( { registry }: DispatcherArgs ) => {
-			registry
-				.dispatch( preferencesStore )
-				.set( 'ai-services', name, value );
+			registry.dispatch( preferencesStore ).set( scope, name, value );
 		};
 	},
 
 	/**
 	 * Toggles a preference.
 	 *
-	 * @param name - Preference name.
+	 * @param scope - Scope identifier.
+	 * @param name  - Preference name.
 	 * @returns Action creator.
 	 */
-	togglePreference( name: string ) {
+	togglePreference( scope: string, name: string ) {
 		return ( { registry, select }: DispatcherArgs ) => {
-			const currentValue = select.getPreference( name );
+			const currentValue = select.getPreference( scope, name );
 			registry
 				.dispatch( preferencesStore )
-				.set( 'ai-services', name, ! currentValue );
+				.set( scope, name, ! currentValue );
 		};
 	},
 };
 
 const selectors = {
 	getPreference: createRegistrySelector(
-		( select ) => ( _state: State, name: string ) => {
-			return select( preferencesStore ).get( 'ai-services', name );
+		( select ) => ( _state: State, scope: string, name: string ) => {
+			return select( preferencesStore ).get( scope, name );
 		}
 	),
 };

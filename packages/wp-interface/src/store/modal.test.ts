@@ -66,8 +66,8 @@ describe( 'modal store', () => {
 		};
 
 		mockDispatchers = Object.assign( vi.fn(), {
-			openModal: vi.fn( ( modalId ) => {
-				const thunk = storeConfig.actions!.openModal( modalId );
+			openModal: vi.fn( ( scope, modalId ) => {
+				const thunk = storeConfig.actions!.openModal( scope, modalId );
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -82,8 +82,11 @@ describe( 'modal store', () => {
 					dispatch: mockDispatchers,
 				} );
 			} ),
-			toggleModal: vi.fn( ( modalId ) => {
-				const thunk = storeConfig.actions!.toggleModal( modalId );
+			toggleModal: vi.fn( ( scope, modalId ) => {
+				const thunk = storeConfig.actions!.toggleModal(
+					scope,
+					modalId
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -105,11 +108,11 @@ describe( 'modal store', () => {
 						.isModalActive as unknown as RegistrySelector
 				 )( mockSelect );
 
-				const result = selector( {}, 'my-modal' );
+				const result = selector( {}, 'test-scope', 'my-modal' );
 
 				expect( mockSelect ).toHaveBeenCalledWith( interfaceStore );
 				expect( isModalActiveMock ).toHaveBeenCalledWith(
-					'ai-services/my-modal'
+					'test-scope/my-modal'
 				);
 				expect( result ).toBe( true );
 			} );
@@ -119,7 +122,10 @@ describe( 'modal store', () => {
 	describe( 'actions', () => {
 		describe( 'openModal', () => {
 			it( 'dispatches openModal to interface store with prefixed ID', () => {
-				storeConfig.actions!.openModal( 'my-modal' )( {
+				storeConfig.actions!.openModal(
+					'test-scope',
+					'my-modal'
+				)( {
 					registry: mockRegistry,
 					select: mockSelectors,
 					dispatch: mockDispatchers,
@@ -130,7 +136,7 @@ describe( 'modal store', () => {
 				);
 				expect(
 					mockInterfaceDispatchers.openModal
-				).toHaveBeenCalledWith( 'ai-services/my-modal' );
+				).toHaveBeenCalledWith( 'test-scope/my-modal' );
 			} );
 		} );
 
@@ -155,13 +161,17 @@ describe( 'modal store', () => {
 			it( 'closes modal if active', () => {
 				mockSelectors.isModalActive.mockReturnValue( true );
 
-				storeConfig.actions!.toggleModal( 'my-modal' )( {
+				storeConfig.actions!.toggleModal(
+					'test-scope',
+					'my-modal'
+				)( {
 					registry: mockRegistry,
 					select: mockSelectors,
 					dispatch: mockDispatchers,
 				} );
 
 				expect( mockSelectors.isModalActive ).toHaveBeenCalledWith(
+					'test-scope',
 					'my-modal'
 				);
 				expect( mockDispatchers.closeModal ).toHaveBeenCalled();
@@ -171,16 +181,21 @@ describe( 'modal store', () => {
 			it( 'opens modal if not active', () => {
 				mockSelectors.isModalActive.mockReturnValue( false );
 
-				storeConfig.actions!.toggleModal( 'my-modal' )( {
+				storeConfig.actions!.toggleModal(
+					'test-scope',
+					'my-modal'
+				)( {
 					registry: mockRegistry,
 					select: mockSelectors,
 					dispatch: mockDispatchers,
 				} );
 
 				expect( mockSelectors.isModalActive ).toHaveBeenCalledWith(
+					'test-scope',
 					'my-modal'
 				);
 				expect( mockDispatchers.openModal ).toHaveBeenCalledWith(
+					'test-scope',
 					'my-modal'
 				);
 				expect( mockDispatchers.closeModal ).not.toHaveBeenCalled();

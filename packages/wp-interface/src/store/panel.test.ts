@@ -56,16 +56,16 @@ describe( 'panel store', () => {
 			isPanelActive: vi.fn(),
 		};
 		mockDispatchers = Object.assign( vi.fn(), {
-			closePanel: vi.fn( ( panelId ) => {
-				const thunk = storeConfig.actions!.closePanel( panelId );
+			closePanel: vi.fn( ( scope: string, panelId: string ) => {
+				const thunk = storeConfig.actions!.closePanel( scope, panelId );
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
 					dispatch: mockDispatchers,
 				} );
 			} ),
-			openPanel: vi.fn( ( panelId ) => {
-				const thunk = storeConfig.actions!.openPanel( panelId );
+			openPanel: vi.fn( ( scope: string, panelId: string ) => {
+				const thunk = storeConfig.actions!.openPanel( scope, panelId );
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -79,62 +79,87 @@ describe( 'panel store', () => {
 	describe( 'selectors', () => {
 		describe( 'isPanelActive', () => {
 			it( 'returns initialOpen when activePanels is undefined', () => {
-				const mockSelect = vi.fn( () => ( {
-					get: vi.fn( () => undefined ),
-				} ) );
+				const mockSelect = vi.fn( ( store ) => {
+					if ( store === preferencesStore ) {
+						return {
+							get: vi.fn( () => undefined ),
+						};
+					}
+					return {};
+				} );
 				const selector = (
 					storeConfig.selectors!
 						.isPanelActive as unknown as RegistrySelector
 				 )( mockSelect );
-				const result = selector( {}, 'panel1', true );
+				const result = selector( 'test-scope', {}, 'panel1', true );
 				expect( result ).toBe( true );
 			} );
 
 			it( 'returns initialOpen when activePanels is not an array', () => {
-				const mockSelect = vi.fn( () => ( {
-					get: vi.fn( () => 'not-array' ),
-				} ) );
+				const mockSelect = vi.fn( ( store ) => {
+					if ( store === preferencesStore ) {
+						return {
+							get: vi.fn( () => 'not-array' ),
+						};
+					}
+					return {};
+				} );
 				const selector = (
 					storeConfig.selectors!
 						.isPanelActive as unknown as RegistrySelector
 				 )( mockSelect );
-				const result = selector( {}, 'panel1', false );
+				const result = selector( 'test-scope', {}, 'panel1', false );
 				expect( result ).toBe( false );
 			} );
 
 			it( 'returns true when panelId is in activePanels', () => {
-				const mockSelect = vi.fn( () => ( {
-					get: vi.fn( () => [ 'panel1', 'panel2' ] ),
-				} ) );
+				const mockSelect = vi.fn( ( store ) => {
+					if ( store === preferencesStore ) {
+						return {
+							get: vi.fn( () => [ 'panel1', 'panel2' ] ),
+						};
+					}
+					return {};
+				} );
 				const selector = (
 					storeConfig.selectors!
 						.isPanelActive as unknown as RegistrySelector
 				 )( mockSelect );
-				const result = selector( {}, 'panel1' );
+				const result = selector( 'test-scope', {}, 'panel1' );
 				expect( result ).toBe( true );
 			} );
 
 			it( 'returns false when panelId is not in activePanels', () => {
-				const mockSelect = vi.fn( () => ( {
-					get: vi.fn( () => [ 'panel2' ] ),
-				} ) );
+				const mockSelect = vi.fn( ( store ) => {
+					if ( store === preferencesStore ) {
+						return {
+							get: vi.fn( () => [ 'panel2' ] ),
+						};
+					}
+					return {};
+				} );
 				const selector = (
 					storeConfig.selectors!
 						.isPanelActive as unknown as RegistrySelector
 				 )( mockSelect );
-				const result = selector( {}, 'panel1' );
+				const result = selector( 'test-scope', {}, 'panel1' );
 				expect( result ).toBe( false );
 			} );
 
 			it( 'returns false when activePanels is empty array and no initialOpen', () => {
-				const mockSelect = vi.fn( () => ( {
-					get: vi.fn( () => [] ),
-				} ) );
+				const mockSelect = vi.fn( ( store ) => {
+					if ( store === preferencesStore ) {
+						return {
+							get: vi.fn( () => [] ),
+						};
+					}
+					return {};
+				} );
 				const selector = (
 					storeConfig.selectors!
 						.isPanelActive as unknown as RegistrySelector
 				 )( mockSelect );
-				const result = selector( {}, 'panel1' );
+				const result = selector( 'test-scope', {}, 'panel1' );
 				expect( result ).toBe( false );
 			} );
 		} );
@@ -147,7 +172,10 @@ describe( 'panel store', () => {
 				getMock.mockReturnValue( [ 'panel1' ] );
 				const setMock = mockPreferencesDispatchers.set;
 
-				const thunk = storeConfig.actions!.openPanel( 'panel1' );
+				const thunk = storeConfig.actions!.openPanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -162,7 +190,10 @@ describe( 'panel store', () => {
 				getMock.mockReturnValue( [ 'panel2' ] );
 				const setMock = mockPreferencesDispatchers.set;
 
-				const thunk = storeConfig.actions!.openPanel( 'panel1' );
+				const thunk = storeConfig.actions!.openPanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -170,7 +201,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel2', 'panel1' ]
 				);
@@ -181,7 +212,10 @@ describe( 'panel store', () => {
 				getMock.mockReturnValue( undefined );
 				const setMock = mockRegistry.dispatch( preferencesStore ).set;
 
-				const thunk = storeConfig.actions!.openPanel( 'panel1' );
+				const thunk = storeConfig.actions!.openPanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -189,7 +223,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel1' ]
 				);
@@ -200,7 +234,10 @@ describe( 'panel store', () => {
 				getMock.mockReturnValue( [] );
 				const setMock = mockRegistry.dispatch( preferencesStore ).set;
 
-				const thunk = storeConfig.actions!.openPanel( 'panel1' );
+				const thunk = storeConfig.actions!.openPanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -208,7 +245,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel1' ]
 				);
@@ -221,7 +258,10 @@ describe( 'panel store', () => {
 				getMock.mockReturnValue( 'not-array' );
 				const setMock = mockPreferencesDispatchers.set;
 
-				const thunk = storeConfig.actions!.closePanel( 'panel1' );
+				const thunk = storeConfig.actions!.closePanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -235,7 +275,10 @@ describe( 'panel store', () => {
 				getMock.mockReturnValue( [ 'panel2' ] );
 				const setMock = mockRegistry.dispatch( preferencesStore ).set;
 
-				const thunk = storeConfig.actions!.closePanel( 'panel1' );
+				const thunk = storeConfig.actions!.closePanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -250,7 +293,10 @@ describe( 'panel store', () => {
 				getMock.mockReturnValue( [ 'panel1', 'panel2' ] );
 				const setMock = mockRegistry.dispatch( preferencesStore ).set;
 
-				const thunk = storeConfig.actions!.closePanel( 'panel1' );
+				const thunk = storeConfig.actions!.closePanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -258,7 +304,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel2' ]
 				);
@@ -269,7 +315,10 @@ describe( 'panel store', () => {
 				getMock.mockReturnValue( [ 'panel1', 'panel2', 'panel3' ] );
 				const setMock = mockRegistry.dispatch( preferencesStore ).set;
 
-				const thunk = storeConfig.actions!.closePanel( 'panel2' );
+				const thunk = storeConfig.actions!.closePanel(
+					'test-scope',
+					'panel2'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -277,7 +326,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel1', 'panel3' ]
 				);
@@ -291,7 +340,10 @@ describe( 'panel store', () => {
 				const setMock = mockPreferencesDispatchers.set;
 				mockSelectors.isPanelActive.mockReturnValue( true );
 
-				const thunk = storeConfig.actions!.togglePanel( 'panel1' );
+				const thunk = storeConfig.actions!.togglePanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -299,7 +351,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel2' ]
 				);
@@ -311,7 +363,10 @@ describe( 'panel store', () => {
 				const setMock = mockPreferencesDispatchers.set;
 				mockSelectors.isPanelActive.mockReturnValue( false );
 
-				const thunk = storeConfig.actions!.togglePanel( 'panel1' );
+				const thunk = storeConfig.actions!.togglePanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -319,7 +374,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel2', 'panel1' ]
 				);
@@ -331,7 +386,10 @@ describe( 'panel store', () => {
 				const setMock = mockPreferencesDispatchers.set;
 				mockSelectors.isPanelActive.mockReturnValue( false );
 
-				const thunk = storeConfig.actions!.togglePanel( 'panel1' );
+				const thunk = storeConfig.actions!.togglePanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -339,7 +397,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel1' ]
 				);
@@ -351,7 +409,10 @@ describe( 'panel store', () => {
 				const setMock = mockPreferencesDispatchers.set;
 				mockSelectors.isPanelActive.mockReturnValue( false );
 
-				const thunk = storeConfig.actions!.togglePanel( 'panel1' );
+				const thunk = storeConfig.actions!.togglePanel(
+					'test-scope',
+					'panel1'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -359,7 +420,7 @@ describe( 'panel store', () => {
 				} );
 
 				expect( setMock ).toHaveBeenCalledWith(
-					'ai-services',
+					'test-scope',
 					'activePanels',
 					[ 'panel1' ]
 				);

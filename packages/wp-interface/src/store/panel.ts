@@ -30,39 +30,38 @@ const actions = {
 	/**
 	 * Opens a panel.
 	 *
+	 * @param scope - Scope identifier.
 	 * @param panelId - Panel identifier.
 	 * @returns Action creator.
 	 */
-	openPanel( panelId: string ) {
+	openPanel( scope: string, panelId: string ) {
 		return ( { registry }: DispatcherArgs ) => {
 			const activePanels =
 				registry
 					.select( preferencesStore )
-					.get( 'ai-services', 'activePanels' ) ?? [];
+					.get( scope, 'activePanels' ) ?? [];
 			if ( activePanels.includes( panelId ) ) {
 				return;
 			}
 			registry
 				.dispatch( preferencesStore )
-				.set( 'ai-services', 'activePanels', [
-					...activePanels,
-					panelId,
-				] );
+				.set( scope, 'activePanels', [ ...activePanels, panelId ] );
 		};
 	},
 
 	/**
 	 * Closes a panel.
 	 *
+	 * @param scope - Scope identifier.
 	 * @param panelId - Panel identifier.
 	 * @returns Action creator.
 	 */
-	closePanel( panelId: string ) {
+	closePanel( scope: string, panelId: string ) {
 		return ( { registry }: DispatcherArgs ) => {
 			const activePanels =
 				registry
 					.select( preferencesStore )
-					.get( 'ai-services', 'activePanels' ) ?? [];
+					.get( scope, 'activePanels' ) ?? [];
 			if (
 				! Array.isArray( activePanels ) ||
 				! activePanels.includes( panelId )
@@ -70,7 +69,7 @@ const actions = {
 				return;
 			}
 			registry.dispatch( preferencesStore ).set(
-				'ai-services',
+				scope,
 				'activePanels',
 				activePanels.filter(
 					( activePanelId ) => activePanelId !== panelId
@@ -85,15 +84,16 @@ const actions = {
 	 * If the panel is active, it will be closed.
 	 * If the panel is closed, it will be opened.
 	 *
+	 * @param scope - Scope identifier.
 	 * @param panelId - Panel identifier.
 	 * @returns Action creator.
 	 */
-	togglePanel( panelId: string ) {
+	togglePanel( scope: string, panelId: string ) {
 		return ( { dispatch, select }: DispatcherArgs ) => {
-			if ( select.isPanelActive( panelId ) ) {
-				dispatch.closePanel( panelId );
+			if ( select.isPanelActive( scope, panelId ) ) {
+				dispatch.closePanel( scope, panelId );
 			} else {
-				dispatch.openPanel( panelId );
+				dispatch.openPanel( scope, panelId );
 			}
 		};
 	},
@@ -104,11 +104,12 @@ const selectors = {
 		( select ) =>
 			(
 				_state: State,
+				scope: string,
 				panelId: string,
 				initialOpen: boolean = false
 			) => {
 				const activePanels = select( preferencesStore ).get(
-					'ai-services',
+					scope,
 					'activePanels'
 				);
 				if ( ! activePanels || ! Array.isArray( activePanels ) ) {

@@ -200,7 +200,7 @@ export function KeyboardShortcutsHelpModal() {
 	const { toggleModal } = useDispatch( interfaceStore );
 
 	useShortcut( 'ai-services/keyboard-shortcuts', () =>
-		toggleModal( 'keyboard-shortcuts-help' )
+		toggleModal( 'ai-services', 'keyboard-shortcuts-help' )
 	);
 
 	return (

@@ -74,15 +74,18 @@ export function Interface(
 			select( interfaceStore );
 
 		return {
-			isDistractionFree: !! getPreference( 'distractionFree' ),
+			isDistractionFree: !! getPreference(
+				'ai-services',
+				'distractionFree'
+			),
 			navigatePreviousRegionShortcut: getAllShortcutKeyCombinations(
 				'ai-services/previous-region'
 			),
 			navigateNextRegionShortcut: getAllShortcutKeyCombinations(
 				'ai-services/next-region'
 			),
-			activeSidebar: getActiveSidebar(),
-			defaultSidebar: getDefaultSidebar(),
+			activeSidebar: getActiveSidebar( 'ai-services' ),
+			defaultSidebar: getDefaultSidebar( 'ai-services' ),
 		};
 	}, [] );
 
@@ -91,16 +94,16 @@ export function Interface(
 
 	useEffect( () => {
 		if ( activeSidebar && ! defaultSidebar ) {
-			setDefaultSidebar( activeSidebar );
+			setDefaultSidebar( 'ai-services', activeSidebar );
 		}
 	}, [ activeSidebar, defaultSidebar, setDefaultSidebar ] );
 
 	useShortcut( 'ai-services/toggle-distraction-free', () => {
-		togglePreference( 'distractionFree' );
+		togglePreference( 'ai-services', 'distractionFree' );
 	} );
 
 	useShortcut( 'ai-services/toggle-sidebar', () => {
-		toggleDefaultSidebar();
+		toggleDefaultSidebar( 'ai-services' );
 	} );
 
 	const navigateRegionsInput = useMemo(

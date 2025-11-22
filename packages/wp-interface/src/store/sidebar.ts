@@ -14,13 +14,13 @@ export enum ActionType {
 type UnknownAction = Action< ActionType.Unknown >;
 type SetDefaultSidebarAction = Action<
 	ActionType.SetDefaultSidebar,
-	{ sidebarId: string }
+	{ scope: string; sidebarId: string }
 >;
 
 export type CombinedAction = UnknownAction | SetDefaultSidebarAction;
 
 export type State = {
-	defaultSidebarId: string | false;
+	defaultSidebarIds: Record< string, string | false >;
 };
 
 export type ActionCreators = typeof actions;
@@ -34,34 +34,36 @@ type DispatcherArgs = ThunkArgs<
 >;
 
 const initialState: State = {
-	defaultSidebarId: false,
+	defaultSidebarIds: {},
 };
 
 const actions = {
 	/**
 	 * Opens a sidebar.
 	 *
+	 * @param scope      - Scope identifier.
 	 * @param sidebarId - Sidebar identifier.
 	 * @returns Action creator.
 	 */
-	openSidebar( sidebarId: string ) {
+	openSidebar( scope: string, sidebarId: string ) {
 		return ( { registry }: DispatcherArgs ) => {
 			registry
 				.dispatch( interfaceStore )
-				.enableComplementaryArea( 'ai-services', sidebarId );
+				.enableComplementaryArea( scope, sidebarId );
 		};
 	},
 
 	/**
 	 * Closes the currently open sidebar (if any).
 	 *
+	 * @param scope - Scope identifier.
 	 * @returns Action creator.
 	 */
-	closeSidebar() {
+	closeSidebar( scope: string ) {
 		return ( { registry }: DispatcherArgs ) => {
 			registry
 				.dispatch( interfaceStore )
-				.disableComplementaryArea( 'ai-services' );
+				.disableComplementaryArea( scope );
 		};
 	},
 
@@ -71,15 +73,16 @@ const actions = {
 	 * If the sidebar is active, it will be closed.
 	 * If the sidebar is closed or another sidebar is active, it will be opened.
 	 *
+	 * @param scope     - Scope identifier.
 	 * @param sidebarId - Sidebar identifier.
 	 * @returns Action creator.
 	 */
-	toggleSidebar( sidebarId: string ) {
+	toggleSidebar( scope: string, sidebarId: string ) {
 		return ( { dispatch, select }: DispatcherArgs ) => {
-			if ( select.isSidebarActive( sidebarId ) ) {
-				dispatch.closeSidebar();
+			if ( select.isSidebarActive( scope, sidebarId ) ) {
+				dispatch.closeSidebar( scope );
 			} else {
-				dispatch.openSidebar( sidebarId );
+				dispatch.openSidebar( scope, sidebarId );
 			}
 		};
 	},
@@ -90,18 +93,19 @@ const actions = {
 	 * If a sidebar is active, it will be closed.
 	 * If no sidebar is active, the default sidebar will be opened.
 	 *
+	 * @param scope - Scope identifier.
 	 * @returns Action creator.
 	 */
-	toggleDefaultSidebar() {
+	toggleDefaultSidebar( scope: string ) {
 		return ( { dispatch, select }: DispatcherArgs ) => {
-			if ( select.getActiveSidebar() ) {
-				dispatch.closeSidebar();
+			if ( select.getActiveSidebar( scope ) ) {
+				dispatch.closeSidebar( scope );
 			} else {
-				const defaultSidebarId = select.getDefaultSidebar();
+				const defaultSidebarId = select.getDefaultSidebar( scope );
 				if ( ! defaultSidebarId ) {
 					return;
 				}
-				dispatch.openSidebar( defaultSidebarId );
+				dispatch.openSidebar( scope, defaultSidebarId );
 			}
 		};
 	},
@@ -109,14 +113,16 @@ const actions = {
 	/**
 	 * Sets the default sidebar.
 	 *
+	 * @param scope     - Scope identifier.
 	 * @param sidebarId - Sidebar identifier.
 	 * @returns Action creator.
 	 */
-	setDefaultSidebar( sidebarId: string ) {
+	setDefaultSidebar( scope: string, sidebarId: string ) {
 		return ( { dispatch }: DispatcherArgs ) => {
 			dispatch( {
 				type: ActionType.SetDefaultSidebar,
 				payload: {
+					scope,
 					sidebarId,
 				},
 			} );
@@ -134,10 +140,13 @@ const actions = {
 function reducer( state: State = initialState, action: CombinedAction ): State {
 	switch ( action.type ) {
 		case ActionType.SetDefaultSidebar: {
-			const { sidebarId } = action.payload;
+			const { scope, sidebarId } = action.payload;
 			return {
 				...state,
-				defaultSidebarId: sidebarId,
+				defaultSidebarIds: {
+					...state.defaultSidebarIds,
+					[ scope ]: sidebarId,
+				},
 			};
 		}
 	}
@@ -146,24 +155,23 @@ function reducer( state: State = initialState, action: CombinedAction ): State {
 }
 
 const selectors = {
-	getActiveSidebar: createRegistrySelector( ( select ) => () => {
-		return select( interfaceStore ).getActiveComplementaryArea(
-			'ai-services'
-		);
-	} ),
+	getActiveSidebar: createRegistrySelector(
+		( select ) => ( _state: State, scope: string ) => {
+			return select( interfaceStore ).getActiveComplementaryArea( scope );
+		}
+	),
 
 	isSidebarActive: createRegistrySelector(
-		( select ) => ( _state: State, sidebarId: string ) => {
+		( select ) => ( _state: State, scope: string, sidebarId: string ) => {
 			return (
-				select( interfaceStore ).getActiveComplementaryArea(
-					'ai-services'
-				) === sidebarId
+				select( interfaceStore ).getActiveComplementaryArea( scope ) ===
+				sidebarId
 			);
 		}
 	),
 
-	getDefaultSidebar: ( state: State ) => {
-		return state.defaultSidebarId;
+	getDefaultSidebar: ( state: State, scope: string ) => {
+		return state.defaultSidebarIds[ scope ] || false;
 	},
 };
 

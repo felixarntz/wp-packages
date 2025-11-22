@@ -88,17 +88,17 @@ describe( 'sidebar store', () => {
 				{} as CombinedAction
 			);
 			expect( state ).toEqual( {
-				defaultSidebarId: false,
+				defaultSidebarIds: {},
 			} );
 		} );
 
 		it( 'sets the default sidebar', () => {
 			const state = storeConfig.reducer!( undefined as unknown as State, {
 				type: ActionType.SetDefaultSidebar,
-				payload: { sidebarId: 'test-sidebar' },
+				payload: { scope: 'test-scope', sidebarId: 'test-sidebar' },
 			} );
 			expect( state ).toEqual( {
-				defaultSidebarId: 'test-sidebar',
+				defaultSidebarIds: { 'test-scope': 'test-sidebar' },
 			} );
 		} );
 	} );
@@ -116,12 +116,12 @@ describe( 'sidebar store', () => {
 					'test-sidebar'
 				);
 
-				const result = selector();
+				const result = selector( {} as State, 'test-scope' );
 
 				expect( mockSelect ).toHaveBeenCalledWith( interfaceStore );
 				expect(
 					mockInterfaceSelectors.getActiveComplementaryArea
-				).toHaveBeenCalledWith( 'ai-services' );
+				).toHaveBeenCalledWith( 'test-scope' );
 				expect( result ).toBe( 'test-sidebar' );
 			} );
 		} );
@@ -138,12 +138,16 @@ describe( 'sidebar store', () => {
 					'test-sidebar'
 				);
 
-				const result = selector( {} as State, 'test-sidebar' );
+				const result = selector(
+					{} as State,
+					'test-scope',
+					'test-sidebar'
+				);
 
 				expect( mockSelect ).toHaveBeenCalledWith( interfaceStore );
 				expect(
 					mockInterfaceSelectors.getActiveComplementaryArea
-				).toHaveBeenCalledWith( 'ai-services' );
+				).toHaveBeenCalledWith( 'test-scope' );
 				expect( result ).toBe( true );
 			} );
 
@@ -158,7 +162,11 @@ describe( 'sidebar store', () => {
 					'other-sidebar'
 				);
 
-				const result = selector( {} as State, 'test-sidebar' );
+				const result = selector(
+					{} as State,
+					'test-scope',
+					'test-sidebar'
+				);
 
 				expect( result ).toBe( false );
 			} );
@@ -166,9 +174,13 @@ describe( 'sidebar store', () => {
 
 		describe( 'getDefaultSidebar', () => {
 			it( 'returns the default sidebar id', () => {
-				const state: State = { defaultSidebarId: 'test-sidebar' };
-				const result =
-					storeConfig.selectors!.getDefaultSidebar( state );
+				const state: State = {
+					defaultSidebarIds: { 'test-scope': 'test-sidebar' },
+				};
+				const result = storeConfig.selectors!.getDefaultSidebar(
+					state,
+					'test-scope'
+				);
 				expect( result ).toBe( 'test-sidebar' );
 			} );
 		} );
@@ -177,8 +189,10 @@ describe( 'sidebar store', () => {
 	describe( 'actions', () => {
 		describe( 'openSidebar', () => {
 			it( 'dispatches enableComplementaryArea to interface store', () => {
-				const thunk =
-					storeConfig.actions!.openSidebar( 'test-sidebar' );
+				const thunk = storeConfig.actions!.openSidebar(
+					'test-scope',
+					'test-sidebar'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -190,13 +204,13 @@ describe( 'sidebar store', () => {
 				);
 				expect(
 					mockInterfaceDispatchers.enableComplementaryArea
-				).toHaveBeenCalledWith( 'ai-services', 'test-sidebar' );
+				).toHaveBeenCalledWith( 'test-scope', 'test-sidebar' );
 			} );
 		} );
 
 		describe( 'closeSidebar', () => {
 			it( 'dispatches disableComplementaryArea to interface store', () => {
-				const thunk = storeConfig.actions!.closeSidebar();
+				const thunk = storeConfig.actions!.closeSidebar( 'test-scope' );
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -208,7 +222,7 @@ describe( 'sidebar store', () => {
 				);
 				expect(
 					mockInterfaceDispatchers.disableComplementaryArea
-				).toHaveBeenCalledWith( 'ai-services' );
+				).toHaveBeenCalledWith( 'test-scope' );
 			} );
 		} );
 
@@ -216,8 +230,10 @@ describe( 'sidebar store', () => {
 			it( 'closes sidebar if it is active', () => {
 				mockSelectors.isSidebarActive.mockReturnValue( true );
 
-				const thunk =
-					storeConfig.actions!.toggleSidebar( 'test-sidebar' );
+				const thunk = storeConfig.actions!.toggleSidebar(
+					'test-scope',
+					'test-sidebar'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -225,17 +241,22 @@ describe( 'sidebar store', () => {
 				} );
 
 				expect( mockSelectors.isSidebarActive ).toHaveBeenCalledWith(
+					'test-scope',
 					'test-sidebar'
 				);
-				expect( mockDispatchers.closeSidebar ).toHaveBeenCalled();
+				expect( mockDispatchers.closeSidebar ).toHaveBeenCalledWith(
+					'test-scope'
+				);
 				expect( mockDispatchers.openSidebar ).not.toHaveBeenCalled();
 			} );
 
 			it( 'opens sidebar if it is not active', () => {
 				mockSelectors.isSidebarActive.mockReturnValue( false );
 
-				const thunk =
-					storeConfig.actions!.toggleSidebar( 'test-sidebar' );
+				const thunk = storeConfig.actions!.toggleSidebar(
+					'test-scope',
+					'test-sidebar'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -243,9 +264,11 @@ describe( 'sidebar store', () => {
 				} );
 
 				expect( mockSelectors.isSidebarActive ).toHaveBeenCalledWith(
+					'test-scope',
 					'test-sidebar'
 				);
 				expect( mockDispatchers.openSidebar ).toHaveBeenCalledWith(
+					'test-scope',
 					'test-sidebar'
 				);
 				expect( mockDispatchers.closeSidebar ).not.toHaveBeenCalled();
@@ -258,15 +281,20 @@ describe( 'sidebar store', () => {
 					'some-sidebar'
 				);
 
-				const thunk = storeConfig.actions!.toggleDefaultSidebar();
+				const thunk =
+					storeConfig.actions!.toggleDefaultSidebar( 'test-scope' );
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
 					dispatch: mockDispatchers,
 				} );
 
-				expect( mockSelectors.getActiveSidebar ).toHaveBeenCalled();
-				expect( mockDispatchers.closeSidebar ).toHaveBeenCalled();
+				expect( mockSelectors.getActiveSidebar ).toHaveBeenCalledWith(
+					'test-scope'
+				);
+				expect( mockDispatchers.closeSidebar ).toHaveBeenCalledWith(
+					'test-scope'
+				);
 				expect( mockDispatchers.openSidebar ).not.toHaveBeenCalled();
 			} );
 
@@ -276,16 +304,22 @@ describe( 'sidebar store', () => {
 					'default-sidebar'
 				);
 
-				const thunk = storeConfig.actions!.toggleDefaultSidebar();
+				const thunk =
+					storeConfig.actions!.toggleDefaultSidebar( 'test-scope' );
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
 					dispatch: mockDispatchers,
 				} );
 
-				expect( mockSelectors.getActiveSidebar ).toHaveBeenCalled();
-				expect( mockSelectors.getDefaultSidebar ).toHaveBeenCalled();
+				expect( mockSelectors.getActiveSidebar ).toHaveBeenCalledWith(
+					'test-scope'
+				);
+				expect( mockSelectors.getDefaultSidebar ).toHaveBeenCalledWith(
+					'test-scope'
+				);
 				expect( mockDispatchers.openSidebar ).toHaveBeenCalledWith(
+					'test-scope',
 					'default-sidebar'
 				);
 				expect( mockDispatchers.closeSidebar ).not.toHaveBeenCalled();
@@ -295,15 +329,20 @@ describe( 'sidebar store', () => {
 				mockSelectors.getActiveSidebar.mockReturnValue( null );
 				mockSelectors.getDefaultSidebar.mockReturnValue( false );
 
-				const thunk = storeConfig.actions!.toggleDefaultSidebar();
+				const thunk =
+					storeConfig.actions!.toggleDefaultSidebar( 'test-scope' );
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
 					dispatch: mockDispatchers,
 				} );
 
-				expect( mockSelectors.getActiveSidebar ).toHaveBeenCalled();
-				expect( mockSelectors.getDefaultSidebar ).toHaveBeenCalled();
+				expect( mockSelectors.getActiveSidebar ).toHaveBeenCalledWith(
+					'test-scope'
+				);
+				expect( mockSelectors.getDefaultSidebar ).toHaveBeenCalledWith(
+					'test-scope'
+				);
 				expect( mockDispatchers.openSidebar ).not.toHaveBeenCalled();
 				expect( mockDispatchers.closeSidebar ).not.toHaveBeenCalled();
 			} );
@@ -311,8 +350,10 @@ describe( 'sidebar store', () => {
 
 		describe( 'setDefaultSidebar', () => {
 			it( 'dispatches SetDefaultSidebar action', () => {
-				const thunk =
-					storeConfig.actions!.setDefaultSidebar( 'test-sidebar' );
+				const thunk = storeConfig.actions!.setDefaultSidebar(
+					'test-scope',
+					'test-sidebar'
+				);
 				thunk( {
 					registry: mockRegistry,
 					select: mockSelectors,
@@ -321,7 +362,10 @@ describe( 'sidebar store', () => {
 
 				expect( mockDispatchers ).toHaveBeenCalledWith( {
 					type: ActionType.SetDefaultSidebar,
-					payload: { sidebarId: 'test-sidebar' },
+					payload: {
+						scope: 'test-scope',
+						sidebarId: 'test-sidebar',
+					},
 				} );
 			} );
 		} );

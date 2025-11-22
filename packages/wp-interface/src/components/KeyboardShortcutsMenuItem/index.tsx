@@ -26,7 +26,9 @@ export function KeyboardShortcutsMenuItem() {
 
 	return (
 		<MenuItem
-			onClick={ () => openModal( 'keyboard-shortcuts-help' ) }
+			onClick={ () =>
+				openModal( 'ai-services', 'keyboard-shortcuts-help' )
+			}
 			shortcut={ shortcut }
 		>
 			{ __( 'Keyboard shortcuts', 'ai-services' ) }

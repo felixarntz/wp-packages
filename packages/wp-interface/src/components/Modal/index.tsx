@@ -23,7 +23,8 @@ function InternalModal( props: WordPressComponentProps< ModalProps, 'div' > ) {
 	const { identifier, title, children, ...additionalProps } = props;
 
 	const isModalActive = useSelect(
-		( select ) => select( interfaceStore ).isModalActive( identifier ),
+		( select ) =>
+			select( interfaceStore ).isModalActive( 'ai-services', identifier ),
 		[ identifier ]
 	);
 	const { closeModal } = useDispatch( interfaceStore );
