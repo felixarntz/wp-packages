@@ -25,6 +25,7 @@ export type ShortcutCategorySectionProps = {
 
 export type KeyboardShortcutsHelpModalLabels = {
 	modalTitle?: string;
+	modalCloseButtonLabel?: string;
 	globalSectionTitle?: string;
 };
 

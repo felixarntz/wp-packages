@@ -13,6 +13,10 @@ export type AppProps = InterfaceScopeProviderProps &
 				KeyboardShortcutsHelpModalProps[ 'labels' ],
 				undefined
 			>[ 'modalTitle' ];
+			keyboardShortcutsModalCloseButtonLabel?: Exclude<
+				KeyboardShortcutsHelpModalProps[ 'labels' ],
+				undefined
+			>[ 'modalCloseButtonLabel' ];
 			keyboardShortcutsGlobalSectionTitle?: Exclude<
 				KeyboardShortcutsHelpModalProps[ 'labels' ],
 				undefined

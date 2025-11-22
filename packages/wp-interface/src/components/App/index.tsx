@@ -18,6 +18,7 @@ export function App( props: WordPressComponentProps< AppProps, null > ) {
 
 	const {
 		keyboardShortcutsModalTitle,
+		keyboardShortcutsModalCloseButtonLabel,
 		keyboardShortcutsGlobalSectionTitle,
 		...interfaceLabels
 	} = labels;
@@ -36,6 +37,8 @@ export function App( props: WordPressComponentProps< AppProps, null > ) {
 					<KeyboardShortcutsHelpModal
 						labels={ {
 							modalTitle: keyboardShortcutsModalTitle,
+							modalCloseButtonLabel:
+								keyboardShortcutsModalCloseButtonLabel,
 							globalSectionTitle:
 								keyboardShortcutsGlobalSectionTitle,
 						} }

@@ -21,6 +21,7 @@ import type {
 
 const DEFAULT_LABELS = {
 	modalTitle: 'Keyboard shortcuts',
+	modalCloseButtonLabel: 'Close keyboard shortcuts modal',
 	globalSectionTitle: 'Global shortcuts',
 };
 
@@ -218,6 +219,10 @@ export function KeyboardShortcutsHelpModal(
 		<Modal
 			identifier="keyboard-shortcuts-help"
 			title={ labels?.modalTitle ?? DEFAULT_LABELS.modalTitle }
+			closeButtonLabel={
+				labels?.modalCloseButtonLabel ??
+				DEFAULT_LABELS.modalCloseButtonLabel
+			}
 			className="editor-keyboard-shortcut-help-modal"
 		>
 			<ShortcutCategorySection categoryName="main" />
