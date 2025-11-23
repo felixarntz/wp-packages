@@ -1,6 +1,6 @@
 {
 	"name": "wp-interface",
-	"version": "1.0.0-beta.3",
+	"version": "1.0.0-beta.4",
 	"description": "Foundational components for implementing a WordPress screen reusing UI patterns from the block editor.",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
@@ -10,8 +10,7 @@
 		"build/**/*",
 		"build-module/**/*",
 		"build-style/**/*",
-		"build-types/**/*",
-		"!*.tsbuildinfo"
+		"build-types/**/*"
 	],
 	"engines": {
 		"node": ">=20.0.0"
