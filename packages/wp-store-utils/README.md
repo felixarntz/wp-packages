@@ -39,3 +39,7 @@ The package exports comprehensive TypeScript interfaces for WordPress data store
 - `StoreActions`
 - `StoreSelectors`
 - `StoreResolvers`
+
+## Contributing
+
+Contributions to the `wp-store-utils` package are welcome. It is being developed in a monorepo alongside my other WordPress NPM packages. Please review the [contributing guidelines](https://github.com/felixarntz/wp-packages/blob/main/CONTRIBUTING.md) to learn more about how you can contribute.
