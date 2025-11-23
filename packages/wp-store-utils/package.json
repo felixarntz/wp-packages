@@ -1,6 +1,6 @@
 {
 	"name": "wp-store-utils",
-	"version": "1.0.0-beta.2",
+	"version": "1.0.0-beta.3",
 	"description": "Utility functions and types for working with WordPress data stores.",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
@@ -9,7 +9,8 @@
 	"files": [
 		"build/**/*",
 		"build-module/**/*",
-		"build-types/**/*"
+		"build-types/**/*",
+		"!*.tsbuildinfo"
 	],
 	"engines": {
 		"node": ">=20.0.0"
