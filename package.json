@@ -1,6 +1,6 @@
 {
 	"private": true,
-	"name": "@felixarntz/wp-root",
+	"name": "wp-root",
 	"workspaces": [
 		"packages/*"
 	],

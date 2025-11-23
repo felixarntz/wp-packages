@@ -1,5 +1,5 @@
 {
-	"name": "@felixarntz/wp-interface",
+	"name": "wp-interface",
 	"version": "1.0.0-beta.1",
 	"description": "Foundational components for implementing a WordPress screen reusing UI patterns from the block editor.",
 	"license": "GPL-2.0-or-later",
@@ -25,7 +25,6 @@
 		"url": "https://github.com/felixarntz/wp-packages/issues"
 	},
 	"dependencies": {
-		"@felixarntz/wp-store-utils": "file:../wp-store-utils",
 		"@wordpress/components": "^30.8.0",
 		"@wordpress/compose": "^7.35.0",
 		"@wordpress/data": "^10.35.0",
@@ -36,7 +35,8 @@
 		"@wordpress/keycodes": "^4.35.0",
 		"@wordpress/notices": "^5.35.0",
 		"@wordpress/preferences": "^4.35.0",
-		"clsx": "^2.1.1"
+		"clsx": "^2.1.1",
+		"wp-store-utils": "file:../wp-store-utils"
 	},
 	"peerDependencies": {
 		"react": "^18.0.0",

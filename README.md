@@ -4,8 +4,8 @@ This monorepo contains various WordPress NPM packages I maintain.
 
 ## Packages
 
-- **[@felixarntz/wp-interface](./packages/wp-interface)**: Foundational components for implementing a WordPress screen reusing UI patterns from the block editor.
-- **[@felixarntz/wp-store-utils](./packages/wp-store-utils)**: Utility functions and types for working with WordPress data stores.
+- **[wp-interface](./packages/wp-interface)**: Foundational components for implementing a WordPress screen reusing UI patterns from the block editor.
+- **[wp-store-utils](./packages/wp-store-utils)**: Utility functions and types for working with WordPress data stores.
 
 ## Contributing
 

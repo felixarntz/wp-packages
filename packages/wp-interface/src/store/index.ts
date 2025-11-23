@@ -1,5 +1,5 @@
 import { createReduxStore, register } from '@wordpress/data';
-import { combineStoreConfigs } from '@felixarntz/wp-store-utils';
+import { combineStoreConfigs } from 'wp-store-utils';
 import { STORE_NAME } from './name';
 import { storeConfig as sidebarStoreConfig } from './sidebar';
 import { storeConfig as modalStoreConfig } from './modal';

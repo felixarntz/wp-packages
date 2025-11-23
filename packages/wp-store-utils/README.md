@@ -1,11 +1,11 @@
-# @felixarntz/wp-store-utils
+# wp-store-utils
 
 Utility functions and types for working with WordPress data stores.
 
 ## Installation
 
 ```bash
-npm install @felixarntz/wp-store-utils
+npm install wp-store-utils
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ This package allows you to split a large WordPress data store into smaller, mana
 
 ```typescript
 import { registerStore } from '@wordpress/data';
-import { combineStoreConfigs } from '@felixarntz/wp-store-utils';
+import { combineStoreConfigs } from 'wp-store-utils';
 import { featureOneConfig } from './feature-one';
 import { featureTwoConfig } from './feature-two';
 

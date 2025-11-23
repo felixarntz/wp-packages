@@ -4,7 +4,7 @@ import type {
 	StoreConfig,
 	Action,
 	ThunkArgs,
-} from '@felixarntz/wp-store-utils';
+} from 'wp-store-utils';
 
 export enum ActionType {
 	Unknown = 'REDUX_UNKNOWN',

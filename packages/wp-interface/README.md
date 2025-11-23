@@ -1,4 +1,4 @@
-# @felixarntz/wp-interface
+# wp-interface
 
 Foundational components for implementing a WordPress screen reusing UI patterns from the block editor.
 
@@ -9,7 +9,7 @@ Get started with a UI like this in less than 5 minutes:
 ## Installation
 
 ```bash
-npm install @felixarntz/wp-interface
+npm install wp-interface
 ```
 
 ## Setting Up Styles
@@ -32,7 +32,7 @@ wp_enqueue_style(
 The `App` component is the main entry point. It handles the layout structure automatically. You can use the `Header`, `HeaderActions`, `Sidebar`, and `Footer` components to populate the respective areas.
 
 ```tsx
-import { App, Header, HeaderActions, PinnedSidebars, MoreMenu, Sidebar, Footer } from '@felixarntz/wp-interface';
+import { App, Header, HeaderActions, PinnedSidebars, MoreMenu, Sidebar, Footer } from 'wp-interface';
 import { Button } from '@wordpress/components';
 import { __, _x, isRTL } from '@wordpress/i18n';
 import { drawerLeft, drawerRight } from '@wordpress/icons';
@@ -102,7 +102,7 @@ Additionally, it supports a `shortcutsDescriptions` prop to provide localized st
 Here is a full list of the labels and keyboard shortcut descriptions supported. It is recommended you provide all of these to ensure your plugin's UI can be properly translated.
 
 ```tsx
-import { App } from '@felixarntz/wp-interface';
+import { App } from 'wp-interface';
 import { __ } from '@wordpress/i18n';
 
 function MyPluginScreen() {
