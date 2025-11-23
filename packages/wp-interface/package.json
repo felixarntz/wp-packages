@@ -15,7 +15,7 @@
 	"engines": {
 		"node": ">=20.0.0"
 	},
-	"homepage": "https://github.com/felixarntz/wp-packages#readme",
+	"homepage": "https://github.com/felixarntz/wp-packages/blob/main/packages/wp-interface/README.md",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/felixarntz/wp-packages.git",
