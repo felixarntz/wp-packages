@@ -2,6 +2,10 @@
 
 Foundational components for implementing a WordPress screen reusing UI patterns from the block editor.
 
+Get started with a UI like this in less than 5 minutes:
+
+![Screenshot of a custom WordPress Admin page with foundational UI resembling the block editor](https://github.com/user-attachments/assets/1de5c933-36bb-43af-b23f-6a6ba2cc8713)
+
 ## Installation
 
 ```bash
