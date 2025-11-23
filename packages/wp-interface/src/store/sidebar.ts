@@ -1,10 +1,6 @@
 import { createRegistrySelector } from '@wordpress/data';
 import { store as interfaceStore } from '@wordpress/interface';
-import type {
-	StoreConfig,
-	Action,
-	ThunkArgs,
-} from 'wp-store-utils';
+import type { StoreConfig, Action, ThunkArgs } from 'wp-store-utils';
 
 export enum ActionType {
 	Unknown = 'REDUX_UNKNOWN',
