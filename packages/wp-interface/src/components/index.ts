@@ -11,5 +11,4 @@ export {
 export { PinnedSidebars } from './PinnedSidebars';
 export { Sidebar } from './Sidebar';
 export { Modal } from './Modal';
-export { KeyboardShortcutsMenuItem } from './KeyboardShortcutsMenuItem';
-export { DistractionFreePreferenceToggleMenuItem } from './DistractionFreePreferenceToggleMenuItem';
+export { MoreMenu } from './MoreMenu';

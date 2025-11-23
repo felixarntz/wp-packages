@@ -1,7 +1,7 @@
 import { useSelect } from '@wordpress/data';
 import { PreferenceToggleMenuItem } from '@wordpress/preferences';
 import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
-import { useInterfaceScope } from '../InterfaceScopeProvider';
+import { useInterfaceScope } from '../../InterfaceScopeProvider';
 import type { DistractionFreePreferenceToggleMenuItemProps } from './types';
 
 const DEFAULT_LABELS = {

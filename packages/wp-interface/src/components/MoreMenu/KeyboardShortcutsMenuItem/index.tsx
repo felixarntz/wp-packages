@@ -1,8 +1,8 @@
 import { MenuItem } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { store as keyboardShortcutsStore } from '@wordpress/keyboard-shortcuts';
-import { store as interfaceStore } from '../../store';
-import { useInterfaceScope } from '../InterfaceScopeProvider';
+import { store as interfaceStore } from '../../../store';
+import { useInterfaceScope } from '../../InterfaceScopeProvider';
 import type { KeyboardShortcutsMenuItemProps } from './types';
 
 const DEFAULT_LABELS = {
