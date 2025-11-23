@@ -1,9 +1,12 @@
 /**
  * WordPress dependencies
  */
-import type { createRegistry } from '@wordpress/data';
+import type {
+	WPDataRegistry,
+	StoreDescriptor,
+} from '@wordpress/data/build-types/registry';
 
-type WPDataRegistry = ReturnType< typeof createRegistry >;
+export type { WPDataRegistry, StoreDescriptor };
 
 export interface Action< Type = string, Payload = Record< string, never > > {
 	type: Type;
