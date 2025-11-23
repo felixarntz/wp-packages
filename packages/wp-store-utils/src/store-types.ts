@@ -1,22 +1,41 @@
 /**
  * WordPress dependencies
  */
+import type { WPDataRegistry } from '@wordpress/data/build-types/registry';
 import type {
-	WPDataRegistry,
+	ActionCreator,
+	Resolver,
+	Selector,
+	StoreInstance,
 	StoreDescriptor,
-} from '@wordpress/data/build-types/registry';
+	CurriedSelectorsOf,
+} from '@wordpress/data/build-types/types';
+import type { ReduxStoreConfig } from '@wordpress/data/build-types/redux-store';
 
-export type { WPDataRegistry, StoreDescriptor };
+export type {
+	WPDataRegistry,
+	ActionCreator,
+	Resolver,
+	Selector,
+	StoreInstance,
+	StoreDescriptor,
+	CurriedSelectorsOf,
+	ReduxStoreConfig,
+};
 
 export interface Action< Type = string, Payload = Record< string, never > > {
 	type: Type;
 	payload: Payload;
 }
 
-type CurriedState< State extends object, F > = F extends (
-	state: State,
-	...args: infer P
-) => infer R
+export interface SelectorWithCustomCurrySignature {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+	CurriedSignature: Function;
+}
+
+type CurriedState< State, F > = F extends SelectorWithCustomCurrySignature
+	? F[ 'CurriedSignature' ]
+	: F extends ( state: State, ...args: infer P ) => infer R
 	? ( ...args: P ) => R
 	: F;
 
@@ -39,14 +58,8 @@ export type Dispatcher< DispatcherArgs > = (
 
 type MapOf< T > = { [ name: string ]: T };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ActionCreator = ( ...args: any[] ) => any | Generator;
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 export type Control = Function;
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export type Resolver = Function | Generator;
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export type Selector = Function;
 
 // This is compatible with the `ReduxStoreConfig` type from '@wordpress/data'.
 export interface StoreConfig<
