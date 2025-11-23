@@ -142,7 +142,7 @@ export function Interface(
 		<div { ...navigateRegionsProps } ref={ navigateRegionsProps.ref }>
 			<InterfaceSkeleton
 				isDistractionFree={ isDistractionFree }
-				className={ clsx( 'wp-interface-interface', className, {
+				className={ clsx( 'wp-interface-skeleton', className, {
 					'is-distraction-free': isDistractionFree,
 				} ) }
 				labels={ labels }
