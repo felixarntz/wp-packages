@@ -1,0 +1,49 @@
+{
+	"name": "wp-admin-components",
+	"version": "1.0.0-beta.1",
+	"description": "Collection of various WordPress admin UI components.",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"module": "build-module/index.js",
+	"types": "build-types",
+	"files": [
+		"build/**/*",
+		"build-module/**/*",
+		"build-style/**/*",
+		"build-types/**/*"
+	],
+	"engines": {
+		"node": ">=20.0.0"
+	},
+	"homepage": "https://github.com/felixarntz/wp-packages/blob/main/packages/wp-admin-components/README.md",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/felixarntz/wp-packages.git",
+		"directory": "packages/wp-admin-components"
+	},
+	"bugs": {
+		"url": "https://github.com/felixarntz/wp-packages/issues"
+	},
+	"dependencies": {
+		"@ariakit/react": "^0.4.15",
+		"@emotion/styled": "^11.6.0",
+		"@wordpress/a11y": "^4.35.0",
+		"@wordpress/components": "^30.8.0",
+		"@wordpress/compose": "^7.35.0",
+		"@wordpress/element": "^6.35.0",
+		"@wordpress/i18n": "^6.8.0",
+		"clsx": "^2.1.1",
+		"wp-component-utils": "file:../wp-component-utils"
+	},
+	"peerDependencies": {
+		"react": "^18.0.0",
+		"react-dom": "^18.0.0"
+	},
+	"scripts": {
+		"prepublishOnly": "npx tsx ../../tools/publish-cleanup.ts",
+		"postpublish": "git checkout package.json"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
