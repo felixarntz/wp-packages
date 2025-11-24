@@ -42,6 +42,8 @@ export function MultiCheckboxControl(
 		onToggle: onToggleProp,
 		showFilter = false,
 		searchLabel,
+		messageSearchResultFound,
+		messageSearchResultsFound,
 	} = props;
 
 	const [ filteredOptions, setFilteredOptions ] = useState( options );
@@ -78,6 +80,8 @@ export function MultiCheckboxControl(
 					className="components-multi-checkbox-control__search-control"
 					options={ options }
 					onFilter={ setFilteredOptions }
+					messageResultFound={ messageSearchResultFound }
+					messageResultsFound={ messageSearchResultsFound }
 					__nextHasNoMarginBottom={ __nextHasNoMarginBottom }
 				/>
 			) }

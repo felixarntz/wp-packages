@@ -13,6 +13,8 @@ export type MultiCheckboxControlProps = {
 	onToggle?: ( value: string ) => void;
 	showFilter?: boolean;
 	searchLabel?: string; // Must be provided if `showFilter` is true.
+	messageSearchResultFound?: string; // Should be provided if `showFilter` is true.
+	messageSearchResultsFound?: string; // Should be provided if `showFilter` is true.
 	id?: string;
 	className?: string;
 	help?: string;
