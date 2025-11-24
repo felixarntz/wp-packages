@@ -30,7 +30,7 @@ export function InputVisibleButton(
 	return (
 		<Button
 			variant="secondary"
-			className="ai-services-input-visible-button"
+			className="wp-admin-components-input-visible-button"
 			onClick={ () => setVisible( ! visible ) }
 			aria-label={ visible ? hideLabel : showLabel }
 			__next40pxDefaultSize

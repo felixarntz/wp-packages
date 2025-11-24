@@ -71,7 +71,7 @@ function UnforwardedSensitiveTextControl(
 			help={ ! HelpContent ? help : undefined }
 			className={ className }
 		>
-			<div className="ai-services-sensitive-text-control-container">
+			<div className="wp-admin-components-sensitive-text-control-container">
 				<input
 					className={ clsx( 'components-text-control__input', {
 						'is-next-40px-default-size': __next40pxDefaultSize,

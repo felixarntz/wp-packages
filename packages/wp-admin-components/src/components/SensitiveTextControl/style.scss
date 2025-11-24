@@ -1,7 +1,7 @@
-.ai-services-sensitive-text-control-container {
+.wp-admin-components-sensitive-text-control-container {
 	display: flex;
 
-	.ai-services-input-visible-button {
+	.wp-admin-components-input-visible-button {
 		margin-left: 4px;
 
 		.dashicons {
@@ -19,7 +19,7 @@
 			min-height: 40px; // Same as button.
 		}
 
-		.ai-services-input-visible-button {
+		.wp-admin-components-input-visible-button {
 			min-height: 40px; // Same as input.
 		}
 	}
