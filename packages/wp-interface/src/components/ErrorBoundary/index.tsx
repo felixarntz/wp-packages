@@ -1,5 +1,4 @@
 import { Component } from '@wordpress/element';
-import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { useCopyToClipboard } from '@wordpress/compose';
 import { doAction } from '@wordpress/hooks';

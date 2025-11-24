@@ -20,7 +20,7 @@ It is recommended to copy the file to your plugin's assets location, as includin
 
 ```php
 wp_enqueue_style(
-	'my-plugin-styles',
+	'my-plugin-wp-interface',
 	plugin_dir_url( __FILE__ ) . 'assets/css/wp-interface/style.css', // Adjust path as needed.
 	array( 'wp-components', 'wp-editor' ),
 	'1.0.0'
