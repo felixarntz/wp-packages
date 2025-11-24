@@ -29,6 +29,7 @@ Here is an example of how to use the `MultiCheckboxControl` component.
 
 ```tsx
 import { useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 import { MultiCheckboxControl } from 'wp-admin-components';
 
 function MySettingsScreen() {
@@ -42,12 +43,14 @@ function MySettingsScreen() {
 
 	return (
 		<MultiCheckboxControl
-			label="Select Options"
+			label={ __( 'Select Options', 'my-plugin' ) }
 			options={ options }
 			value={ selectedValues }
 			onChange={ setSelectedValues }
 			showFilter
-			searchLabel="Search options"
+			searchLabel={ __( 'Search options', 'my-plugin' ) }
+			messageSearchResultFound={ __( '%d result found.', 'my-plugin' ) }
+			messageSearchResultsFound={ __( '%d results found.', 'my-plugin' ) }
 		/>
 	);
 }
