@@ -1,6 +1,6 @@
 {
 	"name": "wp-admin-components",
-	"version": "1.0.0-beta.3",
+	"version": "1.0.0",
 	"description": "Collection of various WordPress admin UI components.",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
